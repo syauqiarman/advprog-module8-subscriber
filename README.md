@@ -14,3 +14,9 @@ b. what it means? `guest:guest@localhost:5672` , what is the first quest, and wh
 ![alt text](image.png)
 
 Berdasarkan bukti yang terlampir diatas, pada waktu tertentu terdapat 20-80 queued message yang dapat terjadi karena perubahan yang dilakukan di subscriber sehingga menerima message lebih lama dari biasanya. Perubahan tersebut menyebabkan penumpukan message karena subscriber tidak bisa menerima pesan secepat publisher mengirim pesan. Jadi ketika melakukan run berulang pada publisher, maka subscriber akan memiliki beban yang berlebih karena banyak pesan yang harus diproses sekaligus. Kesimpulannya, jika terdapat ketidakseimbangan kecepatan antara mengirim dan membaca pesan antara publisher dan subscriber, maka akan menyebabkan antrian message yang berlebihan.
+
+**Bukti running 3 subscriber:**
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+Berdasarkan bukti yang terlampir diatas, terlihat jika jumlah subscriber ditambah maka akan membantu mengurangi beban subscriber sehingga dapat mengurangi antrian message dalam queue. Dengan adanya beberapa seubscriber yang berjalan, maka pesan bisa diproses secara paralel, dimana beberapa subscriber yang sedang berjalan dapat bekerjasama untuk memproses pesan. Dengan cara ini, distribusi beban kerja akan merata dan dapat mempercepat waktu respon terhadap pesan yang masuk. Kesimpulannya, jumlah subscriber yang berjalan dapat menyeimbangkan kecepatan pengiriman dan penerimaan pesan antara publisher dan subscriber yang dapat menurunkan antrian message queue.
